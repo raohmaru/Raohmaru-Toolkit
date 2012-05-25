@@ -1,15 +1,4 @@
-Raohmaru Toolkit
-================
-
-A lightweight toolkit library for Flash ActionScript 3 applications. It targets Flash Player 10.0 or greater.
-
-Released under the MIT License.
-
----------------------------------------
-
-LICENSE
--------
-
+/*
 Copyright (c) 2012 Raohmaru
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -29,3 +18,11 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
+*/
+
+package jp.raohmaru.toolkit.net 
+{
+	
+public namespace tempuri = "http://tempuri.org/";
+
+}

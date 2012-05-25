@@ -1,15 +1,4 @@
-Raohmaru Toolkit
-================
-
-A lightweight toolkit library for Flash ActionScript 3 applications. It targets Flash Player 10.0 or greater.
-
-Released under the MIT License.
-
----------------------------------------
-
-LICENSE
--------
-
+/*
 Copyright (c) 2012 Raohmaru
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -29,3 +18,39 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
+*/
+
+package jp.raohmaru.toolkit.net.data
+{
+
+/**
+ * La clase XMLData hereda de ExternalData la funcionalidad de carga de datos externos y añade la naturaleza de XML al tipo de datos almacenados.
+ * @author raohmaru
+ */
+public class XMLData extends ExternalData
+{
+	/**
+	 * Obtiene una copia del objeto XML de datos interno.
+	 */
+	override public function get data() : *
+	{
+		return (_data) ? XML(_data).copy() : null;
+	}
+
+	/**
+	 * Crea un objeto XMLData.
+	 */
+	public function XMLData()
+	{
+		XML.ignoreWhitespace = true;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	override public function toString() : String
+	{
+		return XML(_data).toXMLString();
+	}
+}
+}
