@@ -77,7 +77,7 @@ import flash.system.LoaderContext;
  * FileLoader) con el método heredado <code>Loader.unload()</code>.
  * @example
 <listing version="3.0">
-import flash.display.*;import flash.events.Event;import jp.raohchan.net.FileLoader;
+import flash.display.*;import flash.events.Event;import jp.raohmaru.toolkit.net.FileLoader;
 
 var floader :FileLoader = new FileLoader();
 	floader.addEventListener(Event.COMPLETE, onPicLoad);	floader.addEventListener(IOErrorEvent.IO_ERROR, onError);

@@ -36,7 +36,7 @@ public class XMLUtil
 	 * @return Un objeto XML creado a partir del objeto especificado
 	 * @example El siguiente ejemplo muestra como se serializa un objeto que contiene otro objeto y una matriz:
 	<listing version="3.0">
-	import jp.raohchan.utils.XMLUtil;	var weapons :Object = {
+	import jp.raohmaru.toolkit.utils.XMLUtil;	var weapons :Object = {
 		first : "sword",
 		second : "bow",
 		shield : false
@@ -141,7 +141,7 @@ public class XMLUtil
 	 * @see Array#sortOn()
 	 * @example El siguiente ejemplo muestra como se ordenan los elementos secundarios de un objeto XML utilizando <code>XMLUtil.sortXml</code>:
 <listing version="3.0">
-import jp.raohchan.utils.XMLUtil;
+import jp.raohmaru.toolkit.utils.XMLUtil;
 
 var xml :XML = &lt;root&gt;
 	&lt;row order="5" state="a"&gt;

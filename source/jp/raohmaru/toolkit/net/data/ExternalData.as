@@ -69,7 +69,7 @@ public class ExternalData extends SimpleData
 	 * @param url Dirección URL a cargar.
 	 * @param vars Variables a enviar (una cadena con los pares nombre/valor o un objeto URLVariables).
 	 * @param method Método POST o GET a utilizar al enviar datos.
-	 * @see jp.raohchan.net.DataLoader#load
+	 * @see jp.raohmaru.toolkit.net.DataLoader#load
 	 */
 	public function load(url : String, vars : Object = null, method : String = "GET") : void
 	{

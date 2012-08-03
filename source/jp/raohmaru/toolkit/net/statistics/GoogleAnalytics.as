@@ -97,7 +97,7 @@ public class GoogleAnalytics implements IMedition
 	 * @see flash.external.ExternalInterface
 	 * @example
 	 <listing version="3.0">
-import jp.raohchan.net.statistics.GoogleAnalytics;
+import jp.raohmaru.toolkit.net.statistics.GoogleAnalytics;
 
 var ga : GoogleAnalytics = new GoogleAnalytics();
     ga.send("/home/boton_enviar");</listing>
@@ -116,7 +116,7 @@ var ga : GoogleAnalytics = new GoogleAnalytics();
 	 * @see flash.external.ExternalInterface
 	 * @example
 	 <listing version="3.0">
-import jp.raohchan.net.statistics.GoogleAnalytics;
+import jp.raohmaru.toolkit.net.statistics.GoogleAnalytics;
 
 var ga : GoogleAnalytics = new GoogleAnalytics();
     ga.trackEvent("Menu", "Ayuda");</listing>

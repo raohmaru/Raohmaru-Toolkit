@@ -33,7 +33,7 @@ public interface Iterable
 	/**
 	 * Obtiene un objeto Iterator para una colección de datos de una clase Iterable.
 	 * @return Un nuevo objeto Iterator
-	 * @see jp.raohchan.collections.Iterator
+	 * @see jp.raohmaru.toolkit.collections.Iterator
 	 */
 	function get iterator() : Iterator;
 }

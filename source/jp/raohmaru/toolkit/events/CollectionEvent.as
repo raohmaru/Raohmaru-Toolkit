@@ -33,7 +33,7 @@ import flash.events.Event;
 	<li><code>CollectionEvent.COLLECTION_REMOVE</code>: se distribuye cuando se elimina un elemento de la colección.</li>
 	<li><code>CollectionEvent.COLLECTION_REPLACE</code>: se distribuye cuando se reemplaza un elemento de la colección.</li>
 </ul>
- * @see jp.raohchan.collections.Collection
+ * @see jp.raohmaru.toolkit.collections.Collection
  * @author raohmaru
  * @source Basado en la clase mx.events.CollectionEvent de Adobe [http://livedocs.adobe.com/flex/3/langref/mx/events/CollectionEvent.html]
  */

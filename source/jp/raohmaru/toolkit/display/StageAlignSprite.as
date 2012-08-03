@@ -32,10 +32,10 @@ import flash.events.*;
  * @author raohmaru
  * @example
 <listing version="3.0">
-import flash.display.StageAlign;import jp.raohchan.system.gui.StageAlignGUI;<br>
-StageAlignGUI.stageWidth = 990;
-StageAlignGUI.stageHeight = 660;<br>
-new StageAlignGUI(some_mc, StageAlign.BOTTOM);var sagui :StageAlignGUI = new StageAlignGUI(other_mc);
+import flash.display.StageAlign;import jp.raohmaru.toolkit.display.StageAlignSprite;<br>
+StageAlignSprite.stageWidth = 990;
+StageAlignSprite.stageHeight = 660;<br>
+new StageAlignSprite(some_mc, StageAlign.BOTTOM);var sagui :StageAlignSprite = new StageAlignSprite(other_mc);
     sagui.align = StageAlign.TOP;    sagui.pixelSnap = true;
 </listing>
  */
@@ -122,10 +122,10 @@ public class StageAlignSprite extends EventDispatcher
 	 * @example
 <listing version="3.0">
 import flash.display.StageAlign;
-import jp.raohchan.system.gui.StageAlignGUI;<br>
-import jp.raohchan.motion.easing.Quad;<br>
-StageAlignGUI.init(700, 450);<br>
-var sagui :StageAlignGUI = new StageAlignGUI(some_mc, StageAlign.TOP);
+import jp.raohmaru.toolkit.display.StageAlignSprite;<br>
+import jp.raohmaru.toolkit.motion.easing.Quad;<br>
+StageAlignSprite.init(700, 450);<br>
+var sagui :StageAlignSprite = new StageAlignSprite(some_mc, StageAlign.TOP);
     sagui.align = StageAlign.TOP;
 	salign.tween = true;
 	salign.tweenTime = .4;
@@ -144,7 +144,7 @@ var sagui :StageAlignGUI = new StageAlignGUI(some_mc, StageAlign.TOP);
 	/**
 	 * La ecuación de movimiento a utilizar en la interpolación.
 	 * Para animar el desplamiento del Sprite, establecer <code>tween = true</code>.
-	 * @default jp.raohchan.motion.easing.Linear.easeNone
+	 * @default jp.raohmaru.toolkit.motion.easing.Linear.easeNone
 	 * @see #tween
 	 */
 	public function get tweenEase() :Function
@@ -173,7 +173,7 @@ var sagui :StageAlignGUI = new StageAlignGUI(some_mc, StageAlign.TOP);
 
 
 	/**
-	 * Crea una nueva instancia de StageAlignGUI, responsable de alinear al Sprite especificado como parámetro respecto al escenario.
+	 * Crea una nueva instancia de StageAlignSprite, responsable de alinear al Sprite especificado como parámetro respecto al escenario.
 	 * @param movie Un objeto Sprite que será alineado respecto al escenario.
 	 * @param align Un valor de la clase StageAlign que especifica la alineación del escenario en Flash Player o el navegador.	 * @param pixelSnap Ajusta la posición del objeto de visualización a valores enteros.	 * @param waitForBrowserInit Corrige el error que se produce al incrustar un SWF con SWFObject o librerías JavaScript similares en un HTML, con
 	 * el parámetro	<code>scale</code> igual a <code>noScale</code>; entonces el navegador en primera instancia reporta erróneamente
@@ -202,8 +202,8 @@ var sagui :StageAlignGUI = new StageAlignGUI(some_mc, StageAlign.TOP);
 	 * @param width Ancho real del documento en píxeles.	 * @param height Altura real del documento en píxeles.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.system.gui.StageAlignGUI;<br>
-	StageAlignGUI.stageWidth = 800;	StageAlignGUI.stageHeight = 600;	// Esto es lo mismo	StageAlignGUI.init(800, 600);
+	import jp.raohmaru.toolkit.display.StageAlignSprite;<br>
+	StageAlignSprite.stageWidth = 800;	StageAlignSprite.stageHeight = 600;	// Esto es lo mismo	StageAlignSprite.init(800, 600);
 	</listing>
 	 */
 	public static function init(width :int, height :int) :void

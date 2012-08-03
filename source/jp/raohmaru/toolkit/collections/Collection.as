@@ -31,22 +31,22 @@ import jp.raohmaru.toolkit.utils.ArrayUtil;
 
 /**
  * Se distribuye cuando se realiza un cambio en los elementos del objeto Collection.
- * @eventType jp.raohchan.events.CollectionEvent.COLLECTION_CHANGE
+ * @eventType jp.raohmaru.toolkit.events.CollectionEvent.COLLECTION_CHANGE
  */
 [Event(name="collectionChange", type="jp.raohmaru.toolkit.events.CollectionEvent") ]
 /**
  * Se distribuye cuando se añade un elemento en el objeto Collection.
- * @eventType jp.raohchan.events.CollectionEvent.COLLECTION_ADD
+ * @eventType jp.raohmaru.toolkit.events.CollectionEvent.COLLECTION_ADD
  */
 [Event(name="collectionAdd", type="jp.raohmaru.toolkit.events.CollectionEvent") ]
 /**
  * Se distribuye cuando se elimina un elemento del objeto Collection.
- * @eventType jp.raohchan.events.CollectionEvent.COLLECTION_REMOVE
+ * @eventType jp.raohmaru.toolkit.events.CollectionEvent.COLLECTION_REMOVE
  */
 [Event(name="collectionRemove", type="jp.raohmaru.toolkit.events.CollectionEvent") ]
 /**
  * Se distribuye cuando se reemplaza un elemento del objeto Collection.
- * @eventType jp.raohchan.events.CollectionEvent.COLLECTION_REPLACE
+ * @eventType jp.raohmaru.toolkit.events.CollectionEvent.COLLECTION_REPLACE
  */
 [Event(name="collectionReplace", type="jp.raohmaru.toolkit.events.CollectionEvent") ]
 
@@ -54,11 +54,11 @@ import jp.raohmaru.toolkit.utils.ArrayUtil;
  * La clase Collection le permite guardar datos en una colección y realizar operaciones sobre la misma.
  * Un objeto Collection distribuye eventos CollectionEvent cuando se realizan modificaciones sobre los datos contenidos.<br><br>
  * Esta clase permite además utilizar el operador de acceso a matriz [] para acceder a los métodos <code>getItemAt()</code> y <code>setItemAt()</code>.
- * @see jp.raohchan.events.CollectionEvent
+ * @see jp.raohmaru.toolkit.events.CollectionEvent
  * @example
 <listing version="3.0">
-import jp.raohchan.collections.Collection;
-import jp.raohchan.events.CollectionEvent;var col :Collection = new Collection();
+import jp.raohmaru.toolkit.collections.Collection;
+import jp.raohmaru.toolkit.events.CollectionEvent;var col :Collection = new Collection();
 	col.addEventListener(CollectionEvent.COLLECTION_ADD, collectionHandler);
 	col.addItem(541);
 	col.addItem(12.2);
@@ -95,8 +95,8 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @see ArrayIterator
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
-	import jp.raohchan.collections.Iterator;
+	import jp.raohmaru.toolkit.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Iterator;
 
 	var collection :Collection = new Collection();		collection.addItem(0);		collection.addItem(1);		collection.addItem(2);		collection.addItem(3);		collection.addItem(4);
 	var iterator:Iterator = collection.iterator;
@@ -126,7 +126,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * el nuevo tipo
 	 * @example En el siguiente ejemplo se crea una colección que sólo acepta datos del tipo uint.
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var uint_collection = new Collection();
 		uint_collection.integrityRule = uint;
@@ -181,7 +181,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @return La nueva longitud de la colección
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("a");
@@ -248,7 +248,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @return El elemento reemplazado
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("naranja");
@@ -277,7 +277,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @return Un valor booleano que representa el resultado de la operación
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 	var item :int = 12;
 	var col :Collection = new Collection();
 		col.addItem(item);
@@ -318,7 +318,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @return El elemento eliminado
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("Manwë");
@@ -403,7 +403,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @return Una cadena de elementos de la colección
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("cero");		col.addItem("uno");
@@ -421,7 +421,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * @return Una matriz que contiene los elementos de la colección
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("cero");
@@ -441,7 +441,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 
 	/**
 	 * Distrubuye los eventos CollectionEvent asociados.
-	 * @see jp.raohchan.events.CollectionEvent
+	 * @see jp.raohmaru.toolkit.events.CollectionEvent
 	 */
 	private function dispatchCollectionEvent(type :String, position :int, items :Array) :void
 	{
@@ -503,7 +503,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * Método proxy. Permite obtener un elemento de la colección con el operador de acceso a matriz []. Internamente invoca al método <code>getItemAt()</code>.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("cero");
@@ -524,7 +524,7 @@ public class Collection extends Proxy implements IEventDispatcher, Iterable
 	 * <code>setItemAt()</code>.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Collection;
 
 	var col :Collection = new Collection();
 		col.addItem("cero");

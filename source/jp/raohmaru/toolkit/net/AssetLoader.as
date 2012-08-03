@@ -31,19 +31,19 @@ import flash.utils.Dictionary;
 /**
  * Se distribuye en cada fotograma informando del progreso de la operación de descarga actual y del progreso de
  * descarga global.
- * @eventType jp.raohchan.events.AssetLoaderEvent.PROGRESS
+ * @eventType jp.raohmaru.toolkit.events.AssetLoaderEvent.PROGRESS
  */
 [Event(name="assetLoaderProgress", type="jp.raohmaru.toolkit.events.AssetLoaderEvent") ]
 
 /**
  * Se distribuye cuando ha finalizado la carga de un archivo de la lista.
- * @eventType jp.raohchan.events.AssetLoaderEvent.COMPLETE
+ * @eventType jp.raohmaru.toolkit.events.AssetLoaderEvent.COMPLETE
  */
 [Event(name="assetLoaderComplete", type="jp.raohmaru.toolkit.events.AssetLoaderEvent") ]
 
 /**
  * Se distribuye cuando se produce un error de entrada o salida en un archivo de la lista que provoca que una operación de carga se realice incorrectamente.
- * @eventType jp.raohchan.events.AssetLoaderEvent.IO_ERROR
+ * @eventType jp.raohmaru.toolkit.events.AssetLoaderEvent.IO_ERROR
  */
 [Event(name="assetLoaderIOError", type="jp.raohmaru.toolkit.events.AssetLoaderEvent") ]
 
@@ -98,8 +98,8 @@ import flash.utils.Dictionary;
  * individual y global.
  * @example
 <listing version="3.0">
-import jp.raohchan.net.AssetLoader;
-import jp.raohchan.events.AssetLoaderEvent;
+import jp.raohmaru.toolkit.net.AssetLoader;
+import jp.raohmaru.toolkit.events.AssetLoaderEvent;
 import flash.events.*;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -150,14 +150,14 @@ public class AssetLoader extends EventDispatcher
 	/**
 	 * La constante AssetLoader.FILE define el valor de la propiedad <code>type</code> de un objeto Asset.
 	 * Indica que debe cargarse un archivo externo con el método <code>FileLoader.load()</code>.
-	 * @see jp.raohchan.net.FileLoader#load()
+	 * @see jp.raohmaru.toolkit.net.FileLoader#load()
 	 */
 	public static const FILE :String = "file";
 
 	/**
 	 * La constante AssetLoader.DATA define el valor de la propiedad <code>type</code> de un objeto Asset.
 	 * Indica que debe cargarse datos con el método <code>DataLoader.load()</code>.
-	 * @see jp.raohchan.net.DataLoader#load()
+	 * @see jp.raohmaru.toolkit.net.DataLoader#load()
 	 */
 	public static const DATA :String = "data";
 

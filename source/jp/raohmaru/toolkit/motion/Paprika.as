@@ -36,8 +36,8 @@ import flash.utils.getTimer;
  * Esta inspirada (y a veces basada) en las tres grandes librerías de movimiento en AS3: caurina.Tweener, TweenMax y Tweensy.
  * @example
 <listing version="3.0">
-import jp.raohchan.motion.Paprika;
-import jp.raohchan.motion.easing.Quad;<br>
+import jp.raohmaru.toolkit.motion.Paprika;
+import jp.raohmaru.toolkit.motion.easing.Quad;<br>
 Paprika.add(some_mc, .5, {x:100, y:200, rotation:15}, Quad.easeInOut, 0, onComplete, [some_mc]);
 
 function onComplete(some_mc :DisplayObject) :void
@@ -69,14 +69,14 @@ public class Paprika extends EventDispatcher
 	 * <li><b>scale</b>: Modifica las propiedades <code>scaleX</code> y <code>scaleY</code> a la vez.</li>	 * <li><b>color</b>: Cambia el color del objeto, modificando su propiedad <code>transform.colorTransform</code>.</li>	 * <li><b>colorTint</b>: Porcentaje que se aplica al color de la tinta, expresado como valor decimal entre 0 y 1.</li>	 * <li><b>brightness</b>: Porcentaje de brillo, expresado como número decimal entre -1 y 1. Los valores positivos iluminan el objeto y un valor de 1
 	 * convierte el objeto en un objeto totalmente blanco. Los valores negativos oscurecen el objeto y un valor de -1 convierte el objeto en un objeto
 	 * totalmente negro.</li>	 * <li><b>contrast</b>: Cantidad de contraste a aplicar. Los valores van desde -1 (sin contrase), 0 (normal) a 1 (muy contrastado).</li></ul>
-	 * @param ease La ecuación de movimiento a utilizar en la interpolación. Están incluidas en la librería en el paquete jp.raohchan.motion.easing.
+	 * @param ease La ecuación de movimiento a utilizar en la interpolación. Están incluidas en la librería en el paquete jp.raohmaru.toolkit.motion.easing.
 	 * @param delay Cantidad de retraso en segundos o fotogramas hasta que se inicia la animación. Si es superior a 0 no se sobrescribirá la interpolación.
 	 * @param onComplete Método que será invocado al finalizar la animación.	 * @param onCompleteParams Matriz con los parámetros a enviar a la función definida en <code>onComplete</code>.
 	 * @param scope Objeto al que se aplica la función definida en <code>onComplete</code>. Si no se especifica, se usará <code>target</code>.
 	 * @return Una instancia de la clase PaprikaSpice con los parámetros de la interpolación.
 	 * @example
-<listing version="3.0">import jp.raohchan.motion.Paprika;
-import jp.raohchan.motion.easing.Quad;<br>
+<listing version="3.0">import jp.raohmaru.toolkit.motion.Paprika;
+import jp.raohmaru.toolkit.motion.easing.Quad;<br>
 Paprika.add(some_mc, .5, {x:100, y:200, scale:1.2}, Quad.easeInOut);var spice :PaprikaSpice = Paprika.add(some_mc, .5, {x:100, y:200, color:0xFFCC00}, Quad.easeIn);</listing>
 	 */
 	public static function add(target :Object, time:Number, props :Object, ease :Function=null, delay :Number=0, onComplete :Function=null,
@@ -196,7 +196,7 @@ Paprika.add(some_mc, .5, {x:100, y:200, scale:1.2}, Quad.easeInOut);var spice :
 	 * @param onCompleteParams Matriz con los parámetros a enviar a la función definida en <code>onComplete</code>.
 	 * @param scope Objeto al que se aplica la función definida en <code>onComplete</code>. Si no se especifica, se usará <code>target</code>.
 	 * @example
-<listing version="3.0">import jp.raohchan.motion.Paprika;<br>
+<listing version="3.0">import jp.raohmaru.toolkit.motion.Paprika;<br>
 Paprika.wait(this, 1, 0, function() :void
 {
     //...

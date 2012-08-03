@@ -38,7 +38,7 @@ public class Asset
 	public var name :String;
 	/**
 	 * Valía del recurso para que éste ocupe un rango mayor en la propiedad <code>AssetLoader.overallProgress</code>.
-	 * @see jp.raohchan.net.AssetLoader#overallProgress
+	 * @see jp.raohmaru.toolkit.net.AssetLoader#overallProgress
 	 * @default 1
 	 */
 	public var importance :Number;

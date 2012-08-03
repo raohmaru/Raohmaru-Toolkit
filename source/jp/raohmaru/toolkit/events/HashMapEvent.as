@@ -34,7 +34,7 @@ import flash.events.Event;
 	<li><code>HashMapEvent.HASHMAP_REPLACE</code>: se distribuye cuando se reemplaza un elemento del objeto HashMap.</li>
 	<li><code>HashMapEvent.HASHMAP_RESET</code>: se distribuye cuando se reestablecen  los valores de un objeto HashMap.</li>
 </ul>
- * @see jp.raohchan.collections.HashMap
+ * @see jp.raohmaru.toolkit.collections.HashMap
  * @author raohmaru
  */
 public class HashMapEvent extends Event

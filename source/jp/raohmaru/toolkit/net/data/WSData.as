@@ -43,7 +43,7 @@ public class WSData extends XMLData
 	 * @param url Dirección URL del proveedor de servicios web.
 	 * @param vars Variables a enviar (una cadena con los pares nombre/valor o un objeto URLVariables).
 	 * @param method Nombre del método a invocar del servicio web.
-	 * @see jp.raohchan.net.WebService#callMethod
+	 * @see jp.raohmaru.toolkit.net.WebService#callMethod
 	 */
 	override public function load(url : String, vars : Object = null, method : String = "") : void
 	{

@@ -54,7 +54,7 @@ import flash.net.*;
  * La clase SimpleMedition envía datos a una URL con el objeto de ser registrados para una estadística.
  * @example
 <listing version="3.0">
-import flash.net.URLRequestMethod;import flash.net.URLVariables;import jp.raohchan.net.statistics.SimpleMedition;
+import flash.net.URLRequestMethod;import flash.net.URLVariables;import jp.raohmaru.toolkit.net.statistics.SimpleMedition;
 
 var med : SimpleMedition = new SimpleMedition();
 	med.url = "http://www.example.org/test.php";	med.method = URLRequestMethod.POST;	med.log = true;
@@ -144,7 +144,7 @@ public class SimpleMedition extends EventDispatcher implements IMedition
 	 * @see flash.net.URLLoader
 	 * @example
 	 <listing version="3.0">
-	 import jp.raohchan.net.statistics.SimpleMedition;
+	 import jp.raohmaru.toolkit.net.statistics.SimpleMedition;
 
 	 var med : SimpleMedition = new SimpleMedition();
 	 med.url = "http://www.example.org/medreg.php";	 med.send("page=descargas&amp;st=5");</listing>

@@ -146,7 +146,7 @@ public class StringUtil
 	 * @return Una copia de esta cadena
 	 * @example
 	 * <listing version="3.0">
-	 * import jp.raohchan.utils.StringUtils;<br>	 * StringUtils.capitalize("En un agujero en el suelo, vivía un hobbit", StringUtil.TITLE);  // "En Un Agujero En El Suelo, Vivía Un Hobbit"	 * StringUtils.capitalize("empezó a contar: uno. dos. tres.", StringUtil.SENTENCE);  // "Empezó a contar: uno. Dos. Tres."</listing>
+	 * import jp.raohmaru.toolkit.utils.StringUtils;<br>	 * StringUtils.capitalize("En un agujero en el suelo, vivía un hobbit", StringUtil.TITLE);  // "En Un Agujero En El Suelo, Vivía Un Hobbit"	 * StringUtils.capitalize("empezó a contar: uno. dos. tres.", StringUtil.SENTENCE);  // "Empezó a contar: uno. Dos. Tres."</listing>
 	 */
 	public static function capitalize(str : String, type : String = null) : String
 	{
@@ -253,7 +253,7 @@ public class StringUtil
      * @return Una nueva cadena sin las etiquetas HTML
 	 * @example
 	 * <listing version="3.0">
-	 * import jp.raohchan.utils.StringUtils;<br>
+	 * import jp.raohmaru.toolkit.utils.StringUtils;<br>
 	 * var s :String = '<font size="36">¿Qué <br><B>HACEMOS</B>?</font>';
 	 * StringUtil.removeHTMLTags(s, "font", "b");  // "¿Qué <br>HACEMOS?"</listing>
      */

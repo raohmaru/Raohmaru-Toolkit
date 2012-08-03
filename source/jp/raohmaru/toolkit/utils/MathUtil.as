@@ -40,7 +40,7 @@ public class MathUtil
 	* @param decimal Convierte el valor en un número de coma flotante y desplaza la coma la cantidad de decimales especificados
 	* @example
 	<listing version="3.0">
-	import jp.raohchan.utils.MathUtil;
+	import jp.raohmaru.toolkit.utils.MathUtil;
 
 	trace( MathUtil.random() );  // 0.35709940269589424
 	trace( MathUtil.random(10) );  // 7.056785519234836

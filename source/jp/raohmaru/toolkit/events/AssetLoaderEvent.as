@@ -32,7 +32,7 @@ import flash.events.Event;
 	<li><code>AssetLoaderEvent.COMPLETE</code>: se distribuye cuando ha finalizado la carga de un archivo de la lista.</li>
 	<li><code>AssetLoaderEvent.IO_ERROR</code>: se distribuye cuando se produce un error de entrada o salida en un archivo de la lista que provoca que una operación de carga se realice incorrectamente.</li>
 </ul>
- * @see jp.raohchan.net.AssetLoader
+ * @see jp.raohmaru.toolkit.net.AssetLoader
  * @author raohmaru
  */
 public class AssetLoaderEvent extends Event
@@ -63,7 +63,7 @@ public class AssetLoaderEvent extends Event
 	}
 	/**
 	 * Obtiene un número con el progreso de la descarga actual. Representa un valor que va del 0 (inicio) al 1 (descargado completamente).
-	 * @see jp.raohchan.net.AssetLoader.progress
+	 * @see jp.raohmaru.toolkit.net.AssetLoader.progress
 	 */
 	public function get progress() :Number
 	{
@@ -72,7 +72,7 @@ public class AssetLoaderEvent extends Event
 	/**
 	 * Obtiene un número con el progreso de la descarga global. Un valor que va del 0 (inicio) al 1 (todos los recursos de la lista
 	 * se han descargado correctamente).
-	 * @see jp.raohchan.net.AssetLoader.overallProgress
+	 * @see jp.raohmaru.toolkit.net.AssetLoader.overallProgress
 	 */
 	public function get overallProgress() :Number
 	{

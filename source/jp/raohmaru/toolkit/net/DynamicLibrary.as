@@ -32,7 +32,7 @@ import flash.system.ApplicationDomain;
  * La clase DynamicLibrary permite cargar archivos SWF y acceder a las clases vínculadas a esos archivos.
  * @example
 <listing version="3.0">
-import jp.raohchan.net.DynamicLibrary;
+import jp.raohmaru.toolkit.net.DynamicLibrary;
 
 var dll :DynamicLibrary = new DynamicLibrary();
 	dll.addEventListener(Event.COMPLETE, completeHandler);

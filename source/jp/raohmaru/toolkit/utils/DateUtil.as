@@ -206,7 +206,7 @@ public class DateUtil
 	 * @see http://es2.php.net/date
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.utils.DateUtil;
+	import jp.raohmaru.toolkit.utils.DateUtil;
 
 	DateUtil.toFormattedTime("%Day% %d% de %Month% de %yyyy%");  // Lunes 1 de Diciembre de 2012</listing>
 	 */

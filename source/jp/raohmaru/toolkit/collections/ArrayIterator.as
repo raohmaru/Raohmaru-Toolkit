@@ -27,7 +27,7 @@ package jp.raohmaru.toolkit.collections
  * La clase ArrayIterator proporciona los métodos para recorrer los elementos de una matriz.
  * @example
 <listing version="3.0">
-import jp.raohchan.collections.ArrayIterator;import jp.raohchan.collections.Iterator;
+import jp.raohmaru.toolkit.collections.ArrayIterator;import jp.raohmaru.toolkit.collections.Iterator;
 
 var arr :Array = [0,1,2,3,4];
 var it:Iterator = new ArrayIterator(arr);
@@ -118,7 +118,7 @@ public class ArrayIterator implements Iterator
 	 * @return El elemento actual de la matriz
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.ArrayIterator;
+	import jp.raohmaru.toolkit.collections.ArrayIterator;
 
 	var arr :Array = ["a", "b", "c", "d"];
 	var it:ArrayIterator = new ArrayIterator(arr);

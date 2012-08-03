@@ -27,7 +27,7 @@ package jp.raohmaru.toolkit.collections
  * La clase HashIterator proporciona los métodos para recorrer los elementos de un objeto.
  * @example
 <listing version="3.0">
-import jp.raohchan.collections.HashIterator;import jp.raohchan.collections.Iterator;
+import jp.raohmaru.toolkit.collections.HashIterator;import jp.raohmaru.toolkit.collections.Iterator;
 
 var collect :Object = { "a": 1, "b":2, "c":3, "d":4, "e":5};
 var it:Iterator = new HashIterator(collect);
@@ -120,7 +120,7 @@ public class HashIterator implements Iterator
 	 * @return Una matriz que contiene la clave y el valor del elemento actual del objeto
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashIterator;
+	import jp.raohmaru.toolkit.collections.HashIterator;
 	var collect :Object = { "a": 1, "b":2, "c":3, "d":4, "e":5 };
 	var it:Iterator = new HashIterator(collect);
 

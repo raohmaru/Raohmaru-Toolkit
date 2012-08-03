@@ -39,7 +39,7 @@ public class FormUtil
 	 * @return Una matriz con el rango especificado.
 	 * @example
 	 * <listing version="3.0">
-	 * import jp.raohchan.form.FormUtil;
+	 * import jp.raohmaru.toolkit.form.FormUtil;
 	 * import fl.data.DataProvider;
 	 *
 	 * var dp:DataProvider = new DataProvider();
@@ -68,8 +68,8 @@ public class FormUtil
 	 * @see flash.text.TextField#restrict
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.form.FormType;
-	import jp.raohchan.form.TextUtil;<br>
+	import jp.raohmaru.toolkit.form.FormType;
+	import jp.raohmaru.toolkit.form.TextUtil;<br>
 	email_input.restrict = TextUtil.getRestrictChars(FormType.EMAIL);</listing>
 	 */
 	public static function getRestrictChars(type : String) : String

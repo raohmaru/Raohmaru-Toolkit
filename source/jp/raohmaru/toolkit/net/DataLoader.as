@@ -68,7 +68,7 @@ import flash.net.*;
 <listing version="3.0">
 import flash.display.*;
 import flash.events.Event;import flash.net.URLRequestMethod;
-import jp.raohchan.net.DataLoader;
+import jp.raohmaru.toolkit.net.DataLoader;
 
 var dloader : DataLoader = new DataLoader();
 	dloader.method = URLRequestMethod.POST;	dloader.addEventListener(Event.COMPLETE, onLoadComplete);

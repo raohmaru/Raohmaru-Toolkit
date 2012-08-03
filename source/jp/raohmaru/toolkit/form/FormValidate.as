@@ -76,11 +76,11 @@ public class FormValidate
 	 * @param type El tipo de validación que se ejecutará
 	 * @param element Un objeto TextField para una validación del tipo FormType.CONFIRM
 	 * @return El resultado de la validación
-	 * @see jp.raohchan.form.FormType
+	 * @see jp.raohmaru.toolkit.form.FormType
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.form.FormType;
-	import jp.raohchan.form.Form;<br>
+	import jp.raohmaru.toolkit.form.FormType;
+	import jp.raohmaru.toolkit.form.Form;<br>
 	Form.validateElement("test&#64;example.org", FormType.EMAIL);</listing>
 	 */
 	public static function validateElement(str :String, type :String, element :TextField = null) :Boolean
@@ -214,7 +214,7 @@ public class FormValidate
 	 * @see #passwordMinLength
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.form.Form;<br>
+	import jp.raohmaru.toolkit.form.Form;<br>
 	Form.passwordMinLength = 6;
 	Form.validatePassword("sun"); // false</listing>
 	 */
@@ -229,8 +229,8 @@ public class FormValidate
 	 * @return El resultado de la validación
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.form.FormType;
-	import jp.raohchan.form.Form;
+	import jp.raohmaru.toolkit.form.FormType;
+	import jp.raohmaru.toolkit.form.Form;
 	import flash.text.TextField;<br>
 	var city : TextField = new TextField();
 	city.name = "city";
@@ -323,7 +323,7 @@ public class FormValidate
 	 * @return El resultado de la validación.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.form.FormValidate;
+	import jp.raohmaru.toolkit.form.FormValidate;
 
 	FormValidate.validateDate("01/01/1988");  // true	FormValidate.validateDate("1/10/95", "d/m/yy");  // true	FormValidate.validateDate("01-31-1288 22:50:31", "mm-dd-yyyy HH:MM:SS");  // true
 	</listing>

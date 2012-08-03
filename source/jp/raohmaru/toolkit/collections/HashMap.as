@@ -29,27 +29,27 @@ import flash.utils.*;
 
 /**
  * Se distribuye cuando se realiza un cambio en los elementos del objeto HashMap.
- * @eventType jp.raohchan.events.HashMapEvent.HASHMAP_CHANGE
+ * @eventType jp.raohmaru.toolkit.events.HashMapEvent.HASHMAP_CHANGE
  */
 [Event(name="hashMapChange", type="jp.raohmaru.toolkit.events.HashMapEvent") ]
 /**
  * Se distribuye cuando se añade un elemento en el objeto HashMap.
- * @eventType jp.raohchan.events.HashMapEvent.HASHMAP_ADD
+ * @eventType jp.raohmaru.toolkit.events.HashMapEvent.HASHMAP_ADD
  */
 [Event(name="hashMapAdd", type="jp.raohmaru.toolkit.events.HashMapEvent") ]
 /**
  * Se distribuye cuando se elimina un elemento del objeto HashMap.
- * @eventType jp.raohchan.events.HashMapEvent.HASHMAP_REMOVE
+ * @eventType jp.raohmaru.toolkit.events.HashMapEvent.HASHMAP_REMOVE
  */
 [Event(name="hashMapRemove", type="jp.raohmaru.toolkit.events.HashMapEvent") ]
 /**
  * Se distribuye cuando se reemplaza un elemento del objeto HashMap.
- * @eventType jp.raohchan.events.HashMapEvent.HASHMAP_REPLACE
+ * @eventType jp.raohmaru.toolkit.events.HashMapEvent.HASHMAP_REPLACE
  */
 [Event(name="hashMapReplace", type="jp.raohmaru.toolkit.events.HashMapEvent") ]
 /**
  * Se distribuye cuando se reestablecen los valores de un objeto HashMap.
- * @eventType jp.raohchan.events.HashMapEvent.HASHMAP_RESET
+ * @eventType jp.raohmaru.toolkit.events.HashMapEvent.HASHMAP_RESET
  */
 [Event(name="hashMapReset", type="jp.raohmaru.toolkit.events.HashMapEvent") ]
 
@@ -57,11 +57,11 @@ import flash.utils.*;
  * La clase HashMap le permite guardar datos en el par clave / valor y realizar operaciones sobre la misma.
  * Un objeto HashMap distribuye eventos HashMapEvent cuando se realizan modificaciones sobre los datos contenidos.<br><br>
  * Esta clase permite además utilizar el operador de acceso a matriz [] para acceder a los métodos <code>getValue()</code> y <code>setValue()</code>.
- * @see jp.raohchan.events.HashMapEvent
+ * @see jp.raohmaru.toolkit.events.HashMapEvent
  * @example
 <listing version="3.0">
-import jp.raohchan.collections.HashMap;
-import jp.raohchan.events.HashMapEvent;var map :HashMap = new HashMap();
+import jp.raohmaru.toolkit.collections.HashMap;
+import jp.raohmaru.toolkit.events.HashMapEvent;var map :HashMap = new HashMap();
 	map.addEventListener(HashMapEvent.HASHMAP_ADD, mapHandler);
 
 	map.add("nivel", 1);
@@ -100,8 +100,8 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * Obtiene una matriz con todas las claves del objeto HashMap.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
-	import jp.raohchan.events.HashMapEvent;
+	import jp.raohmaru.toolkit.collections.HashMap;
+	import jp.raohmaru.toolkit.events.HashMapEvent;
 
 	var map :HashMap = new HashMap();
 		map.add("a", 1);
@@ -124,8 +124,8 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * Obtiene una matriz con todas los valores del objeto HashMap.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
-	import jp.raohchan.events.HashMapEvent;
+	import jp.raohmaru.toolkit.collections.HashMap;
+	import jp.raohmaru.toolkit.events.HashMapEvent;
 
 	var map :HashMap = new HashMap();
 		map.add("a", 1);
@@ -153,8 +153,8 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @see ArrayIterator
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.Collection;
-	import jp.raohchan.collections.Iterator;
+	import jp.raohmaru.toolkit.collections.Collection;
+	import jp.raohmaru.toolkit.collections.Iterator;
 
 	var collection :Collection = new Collection();
 		collection.addItem(0);
@@ -200,7 +200,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @return El nuevo tamaño de la instancia de HashMap
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 	var map :HashMap = new HashMap();
 		map.add( "nivel", 1 );
 		map.add( "raza", "beffraen" );
@@ -231,7 +231,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @return El nuevo tamaño de la instancia de HashMap
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;	import flash.utils.Dictionary;
+	import jp.raohmaru.toolkit.collections.HashMap;	import flash.utils.Dictionary;
 
 	var dict :Dictionary = new Dictionary(true);
 		dict["altura"] = 1.85;
@@ -264,7 +264,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @return El nuevo tamaño de la instancia de HashMap
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 
 	var map :HashMap = new HashMap();
 		map.addEntry( {key:"a", value:1} );
@@ -336,8 +336,8 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @param value El valor a añadir
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
-	import jp.raohchan.events.HashMapEvent;
+	import jp.raohmaru.toolkit.collections.HashMap;
+	import jp.raohmaru.toolkit.events.HashMapEvent;
 
 	var map :HashMap = new HashMap();
 		map.add( "marca", "audi" );
@@ -383,8 +383,8 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * Reestablece todos los valores asignados a las claves en el objeto HashMap a <code>undefined</code>.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
-	import jp.raohchan.events.HashMapEvent;
+	import jp.raohmaru.toolkit.collections.HashMap;
+	import jp.raohmaru.toolkit.events.HashMapEvent;
 
 	var map :HashMap = new HashMap();
 		map.add( "red", 0xFF0000 );
@@ -459,7 +459,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @return Una cadena con las claves y los valores del objeto HashMap
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 
 	var map :HashMap = new HashMap();
 		map.add(0, "cero");		map.add(1, "uno");
@@ -487,7 +487,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @return Una matriz que contiene los elementos del objeto HashMap actual
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 
 	var map :HashMap = new HashMap();
 		map.add("cero", 0);
@@ -512,7 +512,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * @return Un objeto con los pares clave / valor del objeto HashMap actual.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 
 	var map :HashMap = new HashMap();
 		map.add("name", "user0");
@@ -534,7 +534,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 
 	/**
 	 * Distrubuye los eventos HashMapEvent asociados.
-	 * @see jp.raohchan.events.HashMapEvent
+	 * @see jp.raohmaru.toolkit.events.HashMapEvent
 	 */
 	private function dispatchHashMapEvent(type :String, key :*, value :*) :void
 	{
@@ -545,7 +545,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * Método proxy. Permite obtener un elemento de la colección con el operador de acceso a matriz []. Internamente invoca al método <code>getValue()</code>.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 
 	var map :HashMap = new HashMap();
 		map.add("alpha", 0.1);
@@ -566,7 +566,7 @@ public class HashMap extends Proxy implements IEventDispatcher, Iterable
 	 * <code>setValue()</code>.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.collections.HashMap;
+	import jp.raohmaru.toolkit.collections.HashMap;
 
 	var map :HashMap = new HashMap();
 		map.add("alpha", 0.1);

@@ -31,7 +31,7 @@ import flash.geom.ColorTransform;
  * @author raohmaru
  * @example
 <listing version="3.0">
-import jp.raohchan.motion.Paprika;import jp.raohchan.motion.easing.Circ;<br>
+import jp.raohmaru.toolkit.motion.Paprika;import jp.raohmaru.toolkit.motion.easing.Circ;<br>
 var spice :PaprikaSpice = Paprika.add(some_mc, 1, {autoAlpha:0});
     spice.ease = Circ.easeInOut;    spice.onComplete = function() :void
     {
@@ -44,13 +44,13 @@ public class PaprikaSpice
 	 * Determina si la duración de la interpolación debe ser en segundos (<code>false</code>) o en fotogramas (<code>true</code>);
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.motion.Paprika;<br>
+	import jp.raohmaru.toolkit.motion.Paprika;<br>
 	Paprika.add(some_mc, 1, {scaleX:0}).useFrames = true;
 	var spice :PaprikaSpice = Paprika.add(other_mc, 1, {alpha:1});	    spice.useFrames = true;</listing>
 	 */
 	public var useFrames :Boolean;
 	/**
-	 * La ecuación de movimiento a utilizar en la interpolación. Están incluidas en la librería en el paquete jp.raohchan.motion.easing.
+	 * La ecuación de movimiento a utilizar en la interpolación. Están incluidas en la librería en el paquete jp.raohmaru.toolkit.motion.easing.
 	 */
 	public var ease :Function;
 	/**
@@ -70,7 +70,7 @@ public class PaprikaSpice
 	 * Los parámetros enviados se definen con la propiedad <code>onCompleteParams</code>.
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.motion.Paprika;<br>
+	import jp.raohmaru.toolkit.motion.Paprika;<br>
 	Paprika.add(some_mc, 1, {color:0xFFCC00}).onUpdate = onUpdate;
 	function onUpdate() :void
 	{
@@ -112,7 +112,7 @@ public class PaprikaSpice
 	 * @see Paprika#add()
 	 * @example
 	<listing version="3.0">
-	import jp.raohchan.motion.Paprika;<br>
+	import jp.raohmaru.toolkit.motion.Paprika;<br>
 	var spice :PaprikaSpice = Paprika.add(some_mc, 1, {y:-110});</listing>
 	 */
 	public function PaprikaSpice()
