@@ -9,3 +9,4 @@ test/
 .flexLibProperties
 .settings/
 .project
+*.bat

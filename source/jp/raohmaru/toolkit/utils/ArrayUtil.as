@@ -35,20 +35,32 @@ public class ArrayUtil
 	 * @param arr Matriz original a desordenar
 	 * @return Matriz desordenada
 	 */
+	[Deprecated(replacement="ArrayUtil.shuffle")]
 	public static function unsort(arr : Array) : Array
 	{
-		var clone_arr : Array = clone(arr),
-			len : int = clone_arr.length,
-			random : Number;
-
-		empty(arr);
-
-		for(var i:int=0; i<len; i++)
+		ArrayUtil.shuffle(arr);
+		return ArrayUtil.shuffle(arr);
+	}
+	
+	/**
+	 * Desordena los elementos de una matriz siguiendo el algoritmo Fisher–Yates.
+	 * Este método modifica la matriz.
+	 * @param arr Matriz original a desordenar
+	 * @return Matriz desordenada
+	 */
+	public static function shuffle(arr :Array) :Array
+	{
+		var i :int = arr.length,
+			j :int,
+			t :*;
+		while (i > 0)
 		{
-			random = Math.round( Math.random()*(clone_arr.length-1) );
-			arr.push( clone_arr.splice( random, 1 )[0] );
+			j = Math.random() * i;
+			t = arr[--i];
+			arr[i] = arr[j];
+			arr[j] = t;	
 		}
-
+		
 		return arr;
 	}
 
