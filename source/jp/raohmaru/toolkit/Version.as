@@ -32,10 +32,10 @@ public class Version
 	/**
 	 * Long version.
 	 */
-	public static const version: String = "1.0.1";
+	public static const version: String = "1.0.2";
 	/**
 	 * Short version.
 	 */
-	public static const shortVersion :String = "1.0.1";
+	public static const shortVersion :String = "1.0";
 }
 }

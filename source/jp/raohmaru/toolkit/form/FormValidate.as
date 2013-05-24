@@ -67,7 +67,7 @@ public class FormValidate
 	 */
 	public static function isNumber(str :String) :Boolean
 	{
-		return (str.replace(/\d|\./g, "").length == 0);
+		return (str.replace(/\d|\.|-|\+/g, "").length == 0);
 	}
 
 	/**
@@ -107,6 +107,9 @@ public class FormValidate
 
 			case FormElementType.DNI:
 				return validateNIF(str);
+
+			case FormElementType.CIF:
+				return validateCIF(str);
 
 			case FormElementType.PASSWORD:
 				return validatePassword(str);
@@ -205,6 +208,47 @@ public class FormValidate
 		if(getNIF_letterFromDNI(str.substr(0, 8)) != input_nifLetter) return false;
 
 		return true;
+	}
+
+	/**
+	 * Comprueba si el numero de CIF es correcto.
+	 * @param nif Una cadena con el numero de CIF.
+	 * @return Boolean Un valor booleano que representa la validez del número CIF.
+	 *
+	 * @author Javier Vicente Medina - http://blog.xavirobot.com/validador-de-nif-cif-y-nie/
+	 */
+	public static function validateCIF(str :String) :Boolean
+	{
+		str = str.toUpperCase();
+		var pares :int,
+			impares :int,
+			suma :String,
+			ultima :String,
+			unumero :int,
+			uletra :Array = ["J","A","B","C","D","E","F","G","H","I"],
+			xxx :String;
+		
+		if( !(/^[ABCDEFGHJKLMNPQS]\d{7}[0-9,A-J]$/g).exec(str) )
+			return false;
+		
+		ultima = str.substr(8,1);
+		for(var i :int=1; i<7; i++)
+		{
+			xxx = (2 * parseInt(str.substr(i++, 1))) + "0";
+			impares += parseInt(xxx.substr(0, 1)) + parseInt(xxx.substr(1, 1));
+			pares += parseInt(str.substr(i, 1));
+		}
+		xxx = (2 * parseInt(str.substr(i, 1))) + "0";
+		impares += parseInt(xxx.substr(0, 1)) + parseInt(xxx.substr(1, 1));
+		suma = (pares + impares).toString();
+		unumero = 10 - parseInt(suma.substr(suma.length-1, 1));
+		if(unumero == 10)
+			unumero = 0;
+		
+		if((ultima == String(unumero)) || (ultima == uletra[unumero]))
+			return true;
+		
+		return false;
 	}
 
 	/**

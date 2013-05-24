@@ -69,8 +69,8 @@ public class FormUtil
 	 * @example
 	<listing version="3.0">
 	import jp.raohmaru.toolkit.form.FormType;
-	import jp.raohmaru.toolkit.form.TextUtil;<br>
-	email_input.restrict = TextUtil.getRestrictChars(FormType.EMAIL);</listing>
+	import jp.raohmaru.toolkit.form.FormUtil;<br>
+	email_input.restrict = FormUtil.getRestrictChars(FormType.EMAIL);</listing>
 	 */
 	public static function getRestrictChars(type : String) : String
 	{
@@ -85,12 +85,11 @@ public class FormUtil
 			case FormElementType.TEXT:
 			case FormElementType.PASSWORD:
 			case FormElementType.DATE:
-				//rchars = "0-9a-zA-Z ÀÁÄÇÈÉËÌÍÏÑÒÓÖÙÚÜàáäçèéëìíïñòóöùúü¡!#$%()*+,\\-./:;=¿?@[]_ {|}€ºª·";
 				rchars = "0-9a-zA-Z ÀÁÄÇÈÉËÌÍÏÑÒÓÖÙÚÜàáäçèéëìíïñòóöùúü!\"#$%&'()*+,\\-./:;<=>?@[]_{|}¡€ª·º¿";
 				break;
 
 			case FormElementType.NUMBER:
-				rchars = "0-9.";
+				rchars = "0-9\\-+.";
 				break;
 
 			case FormElementType.POSTAL_CODE:
@@ -101,6 +100,7 @@ public class FormUtil
 				break;
 
 			case FormElementType.DNI:
+			case FormElementType.CIF:
 				rchars = "0-9a-zA-Z";
 				break;
 

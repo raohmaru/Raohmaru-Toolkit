@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <project name="raoh-toolkit-asdoc" default="main" basedir=".">
 
-	<property name="FLEX_HOME" location="C:\Program Files\Desarrollo\Adobe Flash Builder\Adobe Flash Builder 4.6\sdks\4.6.0"/>
+	<!-- Load the properties file. -->
+	<property file="build.properties" />
+	
+	<property name="FLEX_HOME" location="${flex.sdk.home}"/>
 
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}\ant\lib\flexTasks.jar" />
 		

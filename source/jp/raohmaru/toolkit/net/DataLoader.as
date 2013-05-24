@@ -22,9 +22,10 @@ IN THE SOFTWARE.
 
 package jp.raohmaru.toolkit.net
 {
-import flash.utils.ByteArray;
 import flash.events.*;
 import flash.net.*;
+import flash.utils.ByteArray;
+import flash.utils.Timer;
 
 /**
  * Se distribuye tras decodificar y colocar todos los datos recibidos en la propiedad <code>data</code> del objeto URLLoader. Es posible acceder a los datos recibidos
@@ -67,18 +68,21 @@ import flash.net.*;
  * Clase proxy para cargar datos externos. Simplifica el proceso, así como permite cargar datos en formato de texto, variables con codificación URL o archivos binarios.
 <listing version="3.0">
 import flash.display.*;
-import flash.events.Event;import flash.net.URLRequestMethod;
+import flash.events.Event;
+import flash.net.URLRequestMethod;
 import jp.raohmaru.toolkit.net.DataLoader;
 
 var dloader : DataLoader = new DataLoader();
-	dloader.method = URLRequestMethod.POST;	dloader.addEventListener(Event.COMPLETE, onLoadComplete);
+	dloader.method = URLRequestMethod.POST;
+	dloader.addEventListener(Event.COMPLETE, onLoadComplete);
 	dloader.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 	dloader.loadXML("gallery.xml");
 
 function onLoadComplete(e : Event) : void
 {
 	trace(e.target.data);
-}
+}
+
 function onLoadError(e : Event) : void
 {
 	trace(e);
@@ -92,7 +96,8 @@ public class DataLoader extends EventDispatcher
 				_type : String,
 				_method : String,
 				_headers : Array = [],
-				_dataFormat : String;
+				_dataFormat : String,
+				_timeoutTimer :Timer;
 
 	private const 	XML_TYPE : String = "xml",
 					VARS_TYPE : String = "vars",
@@ -106,7 +111,8 @@ public class DataLoader extends EventDispatcher
 	 * <li>un <b>ByteArray</b> si se utilizó el método <code>loadBin</code>,</li>
 	 * <li>un <b>String</b> si se utilizó el método <code>load</code> sin haber invocado previamente ninguno de los métodos anteriores.</li>
 	 * </ul>
-	 */	public function get data() : *
+	 */
+	public function get data() : *
 	{
 		if(_type == XML_TYPE)
 		{
@@ -207,18 +213,32 @@ public class DataLoader extends EventDispatcher
 		return _loader != null;
 	}
 
+	/**
+	 * Máxima cantidad de tiempo, en milisegundos, hasta que la operación de descarga es cancelada automáticamente.
+	 * @default 30000
+	 */
+	public function get maxTimeout() : Number
+	{
+		return _timeoutTimer.delay;
+	}
+	public function set maxTimeout(time :Number) : void
+	{
+		_timeoutTimer.delay = time;
+	}
 
 	/**
 	 * Crea un nuevo DataLoader con las siguientes propiedades.
 	 * @param method Método POST o GET al enviar datos
 	 * @param headers Cabeceras de solicitud HTTP
 	 * @param dataFormat Formato en que se reciben los datos descargados
+	 * @param maxTimeout Máxima cantidad de tiempo, en milisegundos, hasta que la operación de descarga es cancelada
 	 */
-	public function DataLoader(method : String = "GET", headers : Array = null, dataFormat : String = "text")
+	public function DataLoader(method : String = "GET", headers : Array = null, dataFormat : String = "text", maxTimeout :Number = 30000)
 	{
 		_method = method;
 		if(headers) _headers = headers;
 		_dataFormat = dataFormat;
+		_timeoutTimer = new Timer(maxTimeout, 1);
 	}
 
 	/**
@@ -285,6 +305,9 @@ public class DataLoader extends EventDispatcher
         _loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
         _loader.addEventListener(IOErrorEvent.IO_ERROR, eventHandler);
 
+		_timeoutTimer.addEventListener(TimerEvent.TIMER, timeoutHandler);
+		_timeoutTimer.start();
+		
 		_loader.load( urlRequest );
 	}
 
@@ -297,8 +320,22 @@ public class DataLoader extends EventDispatcher
 		if(_loader)
 		{
 			_loader.close();
+			killListeners();
 			_loader = null;
 		}
+	}
+
+	private function killListeners() : void
+	{
+		_loader.removeEventListener(Event.COMPLETE, eventHandler);
+        _loader.removeEventListener(Event.OPEN, eventHandler);
+        _loader.removeEventListener(ProgressEvent.PROGRESS, eventHandler);
+        _loader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, eventHandler);
+        _loader.removeEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
+        _loader.removeEventListener(IOErrorEvent.IO_ERROR, eventHandler);
+		
+		_timeoutTimer.reset();
+		_timeoutTimer.removeEventListener(TimerEvent.TIMER, timeoutHandler);
 	}
 
 
@@ -311,9 +348,25 @@ public class DataLoader extends EventDispatcher
 			_data = _loader.data;
 
 		if(e.type == Event.COMPLETE || e.type == IOErrorEvent.IO_ERROR)
+		{
+			killListeners();
 			_loader = null;
+		}
 
 		dispatchEvent(e);
+	}
+	
+	private function timeoutHandler(e :TimerEvent):void
+	{
+		if(loaded < 1)
+		{
+			try {
+				_loader.close();
+			} catch(e :Error){}
+			
+			killListeners();
+			dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR, false, false, "TimeoutError: Download operation took longer than maxTimeout"));
+		}
 	}
 }
 }

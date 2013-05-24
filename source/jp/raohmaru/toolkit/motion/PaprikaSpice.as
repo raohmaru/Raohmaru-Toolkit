@@ -72,7 +72,7 @@ public class PaprikaSpice
 	<listing version="3.0">
 	import jp.raohmaru.toolkit.motion.Paprika;<br>
 	Paprika.add(some_mc, 1, {color:0xFFCC00}).onUpdate = onUpdate;
-	function onUpdate() :void
+	function onUpdate(progress :Number) :void
 	{
 	    // ...
 	}</listing>
@@ -276,7 +276,7 @@ public class PaprikaSpice
 					target[v] = _from[v] + _to[v] * _q;
 			}
 
-			if(Boolean(onUpdate)) onUpdate.apply(scope, onCompleteParams);
+			if(Boolean(onUpdate)) onUpdate.apply(scope, onCompleteParams ? [useFrames ? _time : progress].concat(onCompleteParams) : [useFrames ? _time : progress]);
 		}
 
 		if(_time >= _duration)

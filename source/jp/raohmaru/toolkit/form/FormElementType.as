@@ -62,6 +62,10 @@ public class FormElementType
 	 */
 	public static const DNI : String = "dni";
 	/**
+	 * Define un campo de formulario como del tipo CIF.
+	 */
+	public static const CIF : String = "cif";
+	/**
 	 * Define que un campo de formulario debe validarse comparándose a otro.
 	 */
 	public static const CONFIRM : String = "confirm";

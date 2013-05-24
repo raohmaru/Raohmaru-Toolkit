@@ -1,11 +1,11 @@
 Raohmaru Toolkit
 ================
 
-A lightweight toolkit library for Flash ActionScript 3 applications. It targets Flash Player 10.0 or greater.
+A lightweight toolkit library for Flash ActionScript 3 applications. It targets Flash Player 10.0 and greater.
 
-Source code and Project home page @GitHub: <https://github.com/raohmaru/Raohmaru-Toolkit>  
-Donwloads @GoogleCode: <http://code.google.com/p/raohmaru-toolkit/>  
-Documentation @ReadTheDocs: <http://readthedocs.org/docs/raohmaru-toolkit/en/latest/>
+Source code and Project home page at GitHub: <https://github.com/raohmaru/Raohmaru-Toolkit>
+Downloads at GoogleCode: <http://code.google.com/p/raohmaru-toolkit/>
+Documentation at ReadTheDocs: <http://readthedocs.org/docs/raohmaru-toolkit/en/latest/>
 
 Released under the MIT License.
 

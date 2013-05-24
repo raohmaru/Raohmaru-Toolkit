@@ -26,6 +26,7 @@ import flash.display.Loader;
 import flash.events.*;
 import flash.net.URLRequest;
 import flash.system.LoaderContext;
+import flash.utils.Timer;
 
 /**
  * Se distribuye cuando los datos se han cargado correctamente. El evento <code>complete</code> siempre se distribuye después del evento <code>init</code>.
@@ -77,10 +78,13 @@ import flash.system.LoaderContext;
  * FileLoader) con el método heredado <code>Loader.unload()</code>.
  * @example
 <listing version="3.0">
-import flash.display.*;import flash.events.Event;import jp.raohmaru.toolkit.net.FileLoader;
+import flash.display.*;
+import flash.events.Event;
+import jp.raohmaru.toolkit.net.FileLoader;
 
-var floader :FileLoader = new FileLoader();
-	floader.addEventListener(Event.COMPLETE, onPicLoad);	floader.addEventListener(IOErrorEvent.IO_ERROR, onError);
+var floader :FileLoader = new FileLoader(5000);
+	floader.addEventListener(Event.COMPLETE, onPicLoad);
+	floader.addEventListener(IOErrorEvent.IO_ERROR, onError);
 	floader.fload("http://www.adobe.com/lib/com.adobe/template/gnav/adobe-hq.png");
 
 function onPicLoad(e :Event) : void
@@ -92,7 +96,8 @@ function onPicLoad(e :Event) : void
 	FileLoader(e.target).unload();
 	e.target.removeEventListener(Event.COMPLETE, onPicLoad);
 	e.target.removeEventListener(IOErrorEvent.IO_ERROR, onError);
-}function onError(e :IOErrorEvent) : void
+}
+function onError(e :IOErrorEvent) : void
 {
 	// ...
 }</listing>
@@ -101,6 +106,8 @@ function onPicLoad(e :Event) : void
  */
 public class FileLoader extends Loader
 {
+	private var _timeoutTimer :Timer;
+	
 	/**
 	 * Obtiene el progreso de la descarga (0 -&gt; nada descargado, 1 -&gt; 100% descargado)
 	 */
@@ -108,19 +115,27 @@ public class FileLoader extends Loader
 	{
 		return contentLoaderInfo.bytesLoaded/contentLoaderInfo.bytesTotal;
 	}
+	
+	/**
+	 * Máxima cantidad de tiempo, en milisegundos, hasta que la operación de descarga es cancelada automáticamente.
+	 * @default 30000
+	 */
+	public function get maxTimeout() : Number
+	{
+		return _timeoutTimer.delay;
+	}
+	public function set maxTimeout(time :Number) : void
+	{
+		_timeoutTimer.delay = time;
+	}
 
 	/**
 	 * Nuevo FileLoader que puede añadirse a la lista de visualización.
+	 * @param maxTimeout Máxima cantidad de tiempo, en milisegundos, hasta que la operación de descarga es cancelada
 	 */
-	public function FileLoader()
+	public function FileLoader(maxTimeout :Number = 30000)
 	{
-		contentLoaderInfo.addEventListener(Event.OPEN, eventHandler);
-		contentLoaderInfo.addEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
-		contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, eventHandler);
-		contentLoaderInfo.addEventListener(Event.COMPLETE, eventHandler);
-		contentLoaderInfo.addEventListener(Event.INIT, eventHandler);
-		contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, eventHandler);
-		contentLoaderInfo.addEventListener(Event.UNLOAD, eventHandler);
+		_timeoutTimer = new Timer(maxTimeout, 1);
 	}
 
 	/**
@@ -131,12 +146,73 @@ public class FileLoader extends Loader
 	 */
 	public function fload(file : String, context : LoaderContext = null) : void
 	{
+		contentLoaderInfo.addEventListener(Event.OPEN, eventHandler);
+		contentLoaderInfo.addEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
+		contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, eventHandler);
+		contentLoaderInfo.addEventListener(Event.COMPLETE, eventHandler);
+		contentLoaderInfo.addEventListener(Event.INIT, eventHandler);
+		contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, eventHandler);
+		contentLoaderInfo.addEventListener(Event.UNLOAD, eventHandler);
+		
+		_timeoutTimer.addEventListener(TimerEvent.TIMER, timeoutHandler);
+		_timeoutTimer.start();
+		
 		load( new URLRequest(file), context );
+	}
+	
+	/**
+	 * @private
+	 */
+	override public function close() : void
+	{
+		super.close();
+		
+		killListeners();
+	}
+	
+	/**
+	 * @private
+	 */
+	override public function unload() : void
+	{
+		super.unload();
+		
+		killListeners();
+	}
+
+	private function killListeners() : void
+	{
+		contentLoaderInfo.removeEventListener(Event.OPEN, eventHandler);
+		contentLoaderInfo.removeEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
+		contentLoaderInfo.removeEventListener(ProgressEvent.PROGRESS, eventHandler);
+		contentLoaderInfo.removeEventListener(Event.COMPLETE, eventHandler);
+		contentLoaderInfo.removeEventListener(Event.INIT, eventHandler);
+		contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, eventHandler);
+		contentLoaderInfo.removeEventListener(Event.UNLOAD, eventHandler);
+		
+		_timeoutTimer.reset();
+		_timeoutTimer.removeEventListener(TimerEvent.TIMER, timeoutHandler);
 	}
 
 	private function eventHandler(e : Event) : void
 	{
+		if(e.type == Event.COMPLETE || e.type == IOErrorEvent.IO_ERROR)
+			killListeners();
+			
 		dispatchEvent(e);
+	}
+	
+	private function timeoutHandler(e :TimerEvent):void
+	{
+		if(loaded < 1)
+		{
+			try {
+				close();
+			} catch(e :Error){}
+			
+			dispatchEvent(new IOErrorEvent(IOErrorEvent.IO_ERROR, false, false, "TimeoutError: Download operation took longer than maxTimeout"));
+			killListeners();
+		}
 	}
 }
 }
