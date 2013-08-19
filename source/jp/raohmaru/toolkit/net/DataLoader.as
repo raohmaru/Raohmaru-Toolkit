@@ -99,9 +99,23 @@ public class DataLoader extends EventDispatcher
 				_dataFormat : String,
 				_timeoutTimer :Timer;
 
-	private const 	XML_TYPE : String = "xml",
-					VARS_TYPE : String = "vars",
-					BINARY_TYPE : String = "binary";
+	/**
+	 * La constante DataLoader.XML_TYPE define el valor de la propiedad <code>type</code>.
+	 * Indica cómo deben tratarse los datos cargados.
+	 */
+	public static const XML_TYPE : String = "xml";
+	
+	/**
+	 * La constante DataLoader.VARS_TYPE define el valor de la propiedad <code>type</code>.
+	 * Indica cómo deben tratarse los datos cargados.
+	 */
+	public static const VARS_TYPE : String = "vars";
+
+	/**
+	 * La constante DataLoader.BINARY_TYPE define el valor de la propiedad <code>type</code>.
+	 * Indica cómo deben tratarse los datos cargados.
+	 */
+	public static const BINARY_TYPE : String = "binary";
 
 	/**
 	 * Obtiene los datos cargados en el siguiente formato:
@@ -153,6 +167,19 @@ public class DataLoader extends EventDispatcher
 	public function set headers(value : Array) : void
 	{
 		_headers = value;
+	}
+
+	/**
+	 * Define u obtiene el tipo en el que deben formatearse los datos cargados.
+	 * @default DataLoader.XML_TYPE
+	 */
+	public function get type() : String
+	{
+		return _type;
+	}
+	public function set type(value : String) : void
+	{
+		_type = value;
 	}
 
 	/**

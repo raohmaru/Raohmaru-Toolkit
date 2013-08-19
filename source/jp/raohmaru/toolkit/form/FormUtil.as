@@ -82,12 +82,6 @@ public class FormUtil
 				rchars = "0-9a-zA-Z\\-+._@";
 				break;
 
-			case FormElementType.TEXT:
-			case FormElementType.PASSWORD:
-			case FormElementType.DATE:
-				rchars = "0-9a-zA-Z ÀÁÄÇÈÉËÌÍÏÑÒÓÖÙÚÜàáäçèéëìíïñòóöùúü!\"#$%&'()*+,\\-./:;<=>?@[]_{|}¡€ª·º¿";
-				break;
-
 			case FormElementType.NUMBER:
 				rchars = "0-9\\-+.";
 				break;
@@ -103,10 +97,6 @@ public class FormUtil
 			case FormElementType.CIF:
 				rchars = "0-9a-zA-Z";
 				break;
-
-			// Caracteres personalizados
-			default:
-				rchars = type;
 		}
 
 		return rchars;

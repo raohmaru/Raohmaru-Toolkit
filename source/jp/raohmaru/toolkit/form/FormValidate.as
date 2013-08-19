@@ -33,10 +33,11 @@ public class FormValidate
 	private static const	NIF_STRING :String = "TRWAGMYFPDXBNJZSQVHLCKET",
             				NIE_MAX_CHARS :uint = 10;
 
-	private static var _passwordMinLength :uint = 4;
+	private static var _passwordMinLength :uint = 1;
 
 	/**
-	 * Establece la longitud mínima para un campo de contraseña. El valor por defecto es 4.
+	 * Establece la longitud mínima para un campo de contraseña.
+	 * @default 1
 	 * @see #validatePassword()
 	 */
 	public static function get passwordMinLength() :uint

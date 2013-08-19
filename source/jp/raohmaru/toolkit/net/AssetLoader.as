@@ -161,6 +161,13 @@ public class AssetLoader extends EventDispatcher
 	 */
 	public static const DATA :String = "data";
 
+	/**
+	 * La constante AssetLoader.DATA_XML define el valor de la propiedad <code>type</code> de un objeto Asset.
+	 * Indica que debe cargarse datos XML con el método <code>DataLoader.load()</code>.
+	 * @see jp.raohmaru.toolkit.net.DataLoader#load()
+	 */
+	public static const DATA_XML :String = "xml";
+
 	private var _file_loader :FileLoader,
 				_data_loader :DataLoader,
 				_loader :Object,
@@ -346,6 +353,8 @@ public class AssetLoader extends EventDispatcher
 					_data_loader = new DataLoader();
 					eventMan(_data_loader);
 				}
+				
+				_data_loader.type = (asset.type == DATA_XML) ? DataLoader.XML_TYPE : null;				
 				_data_loader.load( asset.url );
 				_loader = _data_loader;
 			}
