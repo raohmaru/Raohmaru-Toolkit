@@ -42,7 +42,7 @@ public class GoogleAnalytics implements IMedition
 
 	/**
 	 * La URL que se va a solicitar.
-	 * @default "pageTracker._trackPageview"
+	 * @default "_gaq.push"
 	 */
 	public function get url() : String
 	{
@@ -81,7 +81,7 @@ public class GoogleAnalytics implements IMedition
 
 
 	/**
-	 * Crea un nuevo objeto GoogleAnalytics y define la propiedad <code>url</code> a "pageTracker._trackPageview".
+	 * Crea un nuevo objeto GoogleAnalytics y define la propiedad <code>url</code> a "_gaq.push".
 	 * @param enabled Define el estado de la instancia GoogleAnalytics.
 	 * @param log Define si debe mostrarse cada petición realizada con <code>GoogleAnalytics.send()</code> en la consola de salida.
 	 * @param url La URL que se va a solicitar.
@@ -109,6 +109,16 @@ var ga : GoogleAnalytics = new GoogleAnalytics();
 	}
 
 	/**
+	 * Alias of <code>send()</code>.
+	 * @param data Cadena con la página a medir
+	 * @see #send()
+	 */
+	public function trackPageview(data :Object) : void
+	{
+		send(data);
+	}
+
+	/**
 	 * Envía una petición de seguimiento de eventos a Google Analytics. La comunicación se establece a través de <code>ExternalInterface.call()</code>.
 	 * @param category Categoría de eventos general.
 	 * @param action Acción del evento.
@@ -119,7 +129,7 @@ var ga : GoogleAnalytics = new GoogleAnalytics();
 import jp.raohmaru.toolkit.net.statistics.GoogleAnalytics;
 
 var ga : GoogleAnalytics = new GoogleAnalytics();
-    ga.trackEvent("Menu", "Ayuda");</listing>
+    ga.trackEvent("Menu", "Ayuda", "Etiqueta_1");</listing>
 	 */
 	public function trackEvent(category :String, action :Object, label :String=null) : void
 	{
