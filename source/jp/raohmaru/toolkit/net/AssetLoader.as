@@ -265,7 +265,7 @@ public class AssetLoader extends EventDispatcher
 	/**
 	 * Cancela la operación de descarga, vacía la lista de recursos, elimina todas las referencias y prepara el objeto
 	 * para su eliminación.
-	 * Después de utilizar <code>AssetLoader.dispose()</code>, el objeto AssetLoader ya no se puede utilizar.
+	 * Después de invocar <code>AssetLoader.dispose()</code>, el objeto AssetLoader ya no se puede utilizar.
 	 */
 	public function dispose() :void
 	{
@@ -306,6 +306,22 @@ public class AssetLoader extends EventDispatcher
 	public function getCurrentAsset() :Asset
 	{
 		return Asset(_list[_idx-1]).clone();
+	}
+
+	/**
+	 * Devuelve un objeto Asset por el nombre.
+	 * @param name Nombre identificativo del recurso.
+	 */
+	public function getAssetByName(name :String) :Asset
+	{
+		var i :int = _list.length;
+		while(--i > -1)
+		{
+			if( Asset(_list[i]).name == name )
+				return Asset(_list[i]).clone();
+		}
+	
+		return null;
 	}
 
 

@@ -4,6 +4,9 @@
 Changelog
 ---------
 
+##### v1.0.4 (2014/06/19)
+* Get an Asset object by name `AssetLoader.getContentByName()`.
+
 ##### v1.0.3 (2013/09/13)
 * `FormUtil.getRestrictChars()` returns `null` if type argument doesn't match.
 * Removed restricted chars for input types text, password and date.
