@@ -113,7 +113,7 @@ var ga : GoogleAnalytics = new GoogleAnalytics();
 	 * @param data Cadena con la página a medir
 	 * @see #send()
 	 */
-	public function trackPageview(data :Object) : void
+	public function trackPageview(data :String) : void
 	{
 		send(data);
 	}
@@ -131,7 +131,7 @@ import jp.raohmaru.toolkit.net.statistics.GoogleAnalytics;
 var ga : GoogleAnalytics = new GoogleAnalytics();
     ga.trackEvent("Menu", "Ayuda", "Etiqueta_1");</listing>
 	 */
-	public function trackEvent(category :String, action :Object, label :String=null) : void
+	public function trackEvent(category :String, action :String, label :String=null) : void
 	{
 		if(_log) trace( "@trackEvent: " + category + " > " + action + (label!=null ? " > "+label : "") );
 		if(_enabled) ExternalInterface.call(url, ["_trackEvent", category, action, label]);
