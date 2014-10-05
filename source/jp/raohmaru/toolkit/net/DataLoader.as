@@ -101,19 +101,25 @@ public class DataLoader extends EventDispatcher
 
 	/**
 	 * La constante DataLoader.XML_TYPE define el valor de la propiedad <code>type</code>.
-	 * Indica cómo deben tratarse los datos cargados.
+	 * Indica que los datos cargados deben tratarse como texto.
+	 */
+	public static const TEXT_TYPE : String = "text";
+
+	/**
+	 * La constante DataLoader.XML_TYPE define el valor de la propiedad <code>type</code>.
+	 * Indica que los datos cargados deben tratarse como texto XML.
 	 */
 	public static const XML_TYPE : String = "xml";
 	
 	/**
 	 * La constante DataLoader.VARS_TYPE define el valor de la propiedad <code>type</code>.
-	 * Indica cómo deben tratarse los datos cargados.
+	 * Indica que los datos cargados deben tratarse como un objeto URLVariables con las variables con codificación URL.
 	 */
-	public static const VARS_TYPE : String = "vars";
+	public static const VARS_TYPE : String = "variables";
 
 	/**
 	 * La constante DataLoader.BINARY_TYPE define el valor de la propiedad <code>type</code>.
-	 * Indica cómo deben tratarse los datos cargados.
+	 * Indica que los datos cargados deben tratarse como un objeto ByteArray con los datos binarios sin formato.
 	 */
 	public static const BINARY_TYPE : String = "binary";
 
@@ -180,6 +186,13 @@ public class DataLoader extends EventDispatcher
 	public function set type(value : String) : void
 	{
 		_type = value;
+		
+		if(_type == VARS_TYPE)
+			dataFormat = URLLoaderDataFormat.VARIABLES;
+		else if(_type == BINARY_TYPE)
+			dataFormat = URLLoaderDataFormat.BINARY;
+		else
+			dataFormat = URLLoaderDataFormat.TEXT;
 	}
 
 	/**
@@ -264,7 +277,7 @@ public class DataLoader extends EventDispatcher
 	{
 		_method = method;
 		if(headers) _headers = headers;
-		_dataFormat = dataFormat;
+		type = dataFormat;
 		_timeoutTimer = new Timer(maxTimeout, 1);
 	}
 
@@ -275,9 +288,7 @@ public class DataLoader extends EventDispatcher
 	 */
 	public function loadXML(url : String, vars : Object = null) : void
 	{
-		_type = XML_TYPE;
-		dataFormat = URLLoaderDataFormat.TEXT;
-
+		type = XML_TYPE;
 		load(url, vars);
 	}
 
@@ -288,9 +299,7 @@ public class DataLoader extends EventDispatcher
 	 */
 	public function loadVars(url : String, vars : Object = null) : void
 	{
-		_type = VARS_TYPE;
-		dataFormat = URLLoaderDataFormat.VARIABLES;
-
+		type = VARS_TYPE;
 		load(url, vars);
 	}
 
@@ -301,9 +310,7 @@ public class DataLoader extends EventDispatcher
 	 */
 	public function loadBin(url : String, vars : Object = null) : void
 	{
-		_type = BINARY_TYPE;
-		dataFormat = URLLoaderDataFormat.BINARY;
-
+		type = BINARY_TYPE;
 		load(url, vars);
 	}
 
@@ -323,7 +330,7 @@ public class DataLoader extends EventDispatcher
 			urlRequest.requestHeaders = headers;
 
 		_loader = new URLLoader();
-		_loader.dataFormat = dataFormat;
+		_loader.dataFormat = _dataFormat;
 
 		_loader.addEventListener(Event.COMPLETE, eventHandler);
         _loader.addEventListener(Event.OPEN, eventHandler);
@@ -374,7 +381,7 @@ public class DataLoader extends EventDispatcher
 		if(e.type == Event.COMPLETE)
 			_data = _loader.data;
 
-		if(e.type == Event.COMPLETE || e.type == IOErrorEvent.IO_ERROR)
+		if(e.type == Event.COMPLETE || e.type == IOErrorEvent.IO_ERROR || e.type == SecurityErrorEvent.SECURITY_ERROR)
 		{
 			killListeners();
 			_loader = null;
