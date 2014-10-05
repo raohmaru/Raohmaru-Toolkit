@@ -26,6 +26,7 @@ import jp.raohmaru.toolkit.events.AssetLoaderEvent;
 
 import flash.display.Sprite;
 import flash.events.*;
+import flash.net.URLRequestHeader;
 import flash.utils.Dictionary;
 
 /**
@@ -125,12 +126,9 @@ var assetloader :AssetLoader = new AssetLoader();
 function assetHandler(e: AssetLoaderEvent) :void
 {
     var arr :Array = ["type", "assetName", "progress", "overallProgress"];
+    trace("ASSET_LOADER_EVENT:" )
     for(var i:int; i&lt;arr.length; i++)
-    {
-        if(i == 0)
-            trace("ASSET_LOADER_EVENT:" )
         trace( "\t" + arr[i] + ": " + e[arr[i]] );
-    }
 
     if(e.type == AssetLoaderEvent.COMPLETE)
     {
@@ -163,10 +161,17 @@ public class AssetLoader extends EventDispatcher
 
 	/**
 	 * La constante AssetLoader.DATA_XML define el valor de la propiedad <code>type</code> de un objeto Asset.
-	 * Indica que debe cargarse datos XML con el método <code>DataLoader.load()</code>.
-	 * @see jp.raohmaru.toolkit.net.DataLoader#load()
+	 * Indica que debe cargarse datos XML con el método <code>DataLoader.loadXML()</code>.
+	 * @see jp.raohmaru.toolkit.net.DataLoader#loadXML()
 	 */
 	public static const DATA_XML :String = "xml";
+
+	/**
+	 * La constante AssetLoader.BINARY define el valor de la propiedad <code>type</code> de un objeto Asset.
+	 * Indica que debe cargarse datos XML con el método <code>DataLoader.loadBin()</code>.
+	 * @see jp.raohmaru.toolkit.net.DataLoader#loadBin()
+	 */
+	public static const BINARY :String = "binary";
 
 	private var _file_loader :FileLoader,
 				_data_loader :DataLoader,
@@ -215,10 +220,11 @@ public class AssetLoader extends EventDispatcher
 	 * @param type Un valor que define el tipo de recurso a descargar. Los posibles valores son:
 	 * <ul><li>AssetLoader.FILE (un archivo)</li>
 	 * <li>AssetLoader.DATA (un origen de datos, p. ej. un archivo XML)</li></ul>
+	 * @param save Indica si los datos descargados deben guardarse en memoria.
 	 */
-	public function addAsset(url :String, name :String, importance :Number=1, type :String="file") :void
+	public function addAsset(url :String, name :String, importance :Number=1, type :String="file", save :Boolean=true) :void
 	{
-		_list.push( new Asset(url, name, importance, type) );
+		_list.push( new Asset(url, name, importance, type, save) );
 
 		var asset :Asset,
 			t :Number = 0;
@@ -277,11 +283,11 @@ public class AssetLoader extends EventDispatcher
 		if(_file_loader)
 		{
 			_file_loader.unload();
-			eventMan(_file_loader, false);
+			removeListeners(_file_loader);
 		}
 
 		if(_data_loader)
-			eventMan(_data_loader, false);
+			removeListeners(_data_loader);
 
 		_file_loader = null;
 		_data_loader = null;
@@ -333,15 +339,19 @@ public class AssetLoader extends EventDispatcher
 		if(e != null)
 		{
 			var asset :Asset = _list[_idx-1];
+			_overall_progress = _loaded + asset.scale;
 
 			if(e.type == Event.COMPLETE)
 			{
-				_assets[asset.name] = (asset.type == FILE) ? FileLoader(e.target).content : DataLoader(e.target).data;
+				_progress = 1;
+				if(asset.save)
+					_assets[asset.name] = (asset.type == FILE) ? FileLoader(e.target).content : DataLoader(e.target).data;
 				dispatchEvent( new AssetLoaderEvent(AssetLoaderEvent.COMPLETE, asset.name, _progress, _overall_progress) );
 			}
 			else
 			{
-				dispatchEvent( new AssetLoaderEvent(AssetLoaderEvent.IO_ERROR, asset.name, 0, _overall_progress) );
+				_progress = 0;
+				dispatchEvent( new AssetLoaderEvent(AssetLoaderEvent.IO_ERROR, asset.name, _progress, _overall_progress) );
 				dispatchEvent(e);
 			}
 
@@ -357,7 +367,7 @@ public class AssetLoader extends EventDispatcher
 				if(_file_loader == null)
 				{
 					_file_loader = new FileLoader();
-					eventMan(_file_loader);
+					addListeners(_file_loader);
 				}
 				_file_loader.fload( asset.url );
 				_loader = _file_loader.contentLoaderInfo;
@@ -367,10 +377,19 @@ public class AssetLoader extends EventDispatcher
 				if(_data_loader == null)
 				{
 					_data_loader = new DataLoader();
-					eventMan(_data_loader);
+					addListeners(_data_loader);
 				}
+				_data_loader.headers = [];
 				
-				_data_loader.type = (asset.type == DATA_XML) ? DataLoader.XML_TYPE : null;				
+				if(asset.type == DATA_XML)
+					_data_loader.type = DataLoader.XML_TYPE;
+				else if(asset.type == BINARY) {
+					_data_loader.type = DataLoader.BINARY_TYPE;
+					_data_loader.headers.push( new URLRequestHeader("Content-Type", "application/octet-stream") );
+				}
+				else
+					_data_loader.type = DataLoader.TEXT_TYPE;
+					
 				_data_loader.load( asset.url );
 				_loader = _data_loader;
 			}
@@ -382,17 +401,26 @@ public class AssetLoader extends EventDispatcher
 		}
 	}
 
-	private function eventMan(target :EventDispatcher, add :Boolean=true) :void
+	private function addListeners(target :EventDispatcher) :void
 	{
-		var m :String = add ? "addEventListener" : "removeEventListener";
+		target.addEventListener(Event.COMPLETE, loadNext);
+		target.addEventListener(IOErrorEvent.IO_ERROR, loadNext);
+        target.addEventListener(Event.OPEN, openHandler);
+		target.addEventListener(Event.INIT, eventHandler);
+		target.addEventListener(ProgressEvent.PROGRESS, eventHandler);
+        target.addEventListener(SecurityErrorEvent.SECURITY_ERROR, eventHandler);
+        target.addEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
+	}
 
-		target[m](Event.COMPLETE, loadNext);
-		target[m](IOErrorEvent.IO_ERROR, loadNext);
-        target[m](Event.OPEN, openHandler);
-		target[m](Event.INIT, eventHandler);
-		target[m](ProgressEvent.PROGRESS, eventHandler);
-        target[m](SecurityErrorEvent.SECURITY_ERROR, eventHandler);
-        target[m](HTTPStatusEvent.HTTP_STATUS, eventHandler);
+	private function removeListeners(target :EventDispatcher) :void
+	{
+		target.removeEventListener(Event.COMPLETE, loadNext);
+		target.removeEventListener(IOErrorEvent.IO_ERROR, loadNext);
+        target.removeEventListener(Event.OPEN, openHandler);
+		target.removeEventListener(Event.INIT, eventHandler);
+		target.removeEventListener(ProgressEvent.PROGRESS, eventHandler);
+        target.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, eventHandler);
+        target.removeEventListener(HTTPStatusEvent.HTTP_STATUS, eventHandler);
 	}
 
 	private function openHandler(e :Event) :void

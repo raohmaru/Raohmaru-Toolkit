@@ -50,6 +50,11 @@ public class Asset
 	 */
 	public var type :String;
 	/**
+	 * Indica si los datos descargados deben guardarse en memoria.
+	 * @default true
+	 */
+	public var save :Boolean;
+	/**
 	 * @private
 	 */
 	internal var scale :Number;
@@ -63,13 +68,14 @@ public class Asset
 	 * <ul><li>AssetLoader.FILE (un archivo)</li>
 	 * <li>AssetLoader.DATA (un origen de datos, p. ej. un archivo XML)</li></ul>
 	 */
-	public function Asset(url :String, name :String, importance :Number=1, type :String="file")
+	public function Asset(url :String, name :String, importance :Number=1, type :String="file", save: Boolean=true)
 	{
 		this.url = url;
 		this.name = name;
 		this.importance = importance;
 		this.scale = importance;
 		this.type = type;
+		this.save = save;
 	}
 
 	/**
@@ -78,7 +84,7 @@ public class Asset
 	 */
 	public function clone() :Asset
 	{
-		return new Asset(url, name, importance, type);
+		return new Asset(url, name, importance, type, save);
 	}
 }
 }
