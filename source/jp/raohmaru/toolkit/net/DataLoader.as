@@ -93,7 +93,7 @@ public class DataLoader extends EventDispatcher
 {
 	private var _loader : URLLoader,
 				_data : *,
-				_type : String,
+				_type : String = "text",
 				_method : String,
 				_headers : Array = [],
 				_dataFormat : String,
@@ -177,7 +177,7 @@ public class DataLoader extends EventDispatcher
 
 	/**
 	 * Define u obtiene el tipo en el que deben formatearse los datos cargados.
-	 * @default DataLoader.XML_TYPE
+	 * @default DataLoader.TEXT_TYPE
 	 */
 	public function get type() : String
 	{
