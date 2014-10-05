@@ -32,7 +32,7 @@ public class Version
 	/**
 	 * Long version.
 	 */
-	public static const version: String = "1.0.3";
+	public static const version: String = "1.0.4";
 	/**
 	 * Short version.
 	 */
