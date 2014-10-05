@@ -4,8 +4,11 @@
 Changelog
 ---------
 
-##### v1.0.4 (2014/06/19)
+##### v1.0.4 (2014/10/05)
 * Get an Asset object by name `AssetLoader.getContentByName()`.
+* Correctly set `DataLoader.dataFormat` and `DataLoader.type`.
+* Load assets as binary files.
+* Save assets in memory is now optional.
 
 ##### v1.0.3 (2013/09/13)
 * `FormUtil.getRestrictChars()` returns `null` if type argument doesn't match.
