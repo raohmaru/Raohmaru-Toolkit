@@ -5,7 +5,7 @@ A lightweight toolkit library for Flash ActionScript 3 applications. It targets 
 
 Source code and Project home page at GitHub: <https://github.com/raohmaru/Raohmaru-Toolkit>  
 Downloads at GoogleDrive: <http://goo.gl/mDQj0w>  
-Documentation: <http://raohmaru.com/lab/actionscript/raohmaru-toolkit/docs/>
+Documentation: <https://raohmaru.com/lab/actionscript/raohmaru-toolkit/docs/>
 
 Released under the MIT License.
 
